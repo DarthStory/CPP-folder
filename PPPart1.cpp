@@ -2,17 +2,28 @@
 #include <thread>
 #include <mutex>
 
+std::mutex mtx;
+
 void countUp() {
-    for(int i = 0; i < 20; i++) {
-        std::cout << i << std::endl;
+
+    mtx.lock();
+    std::cout << "Count Up: " << std::endl;
+    for(int i = 0; i <= 20; i++) {
+        std::cout << i << " ";
     }
+    std::cout << "" << std::endl;
+    mtx.unlock();
 }
 
 void countDown() {
-    for(int j = 20; j != 0; j--) {
-        std::cout << j << std::endl;
-    }
 
+    mtx.lock();
+    std::cout << "Count Down: " << std::endl;
+    for(int j = 20; j >= 0; j--) {
+        std::cout << j << " ";
+    }
+    std::cout << "" << std::endl;
+    mtx.unlock();
 }
 
 
